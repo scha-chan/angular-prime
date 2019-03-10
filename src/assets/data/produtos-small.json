@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "nome" : "Soda", 
+            "unidadeMedida" : "Litro", 
+            "quantidade" : 10, 
+            "preco" : 5.00, 
+            "perecivel" : true, 
+            "dataValidade" : "2020-01-01 18:00:00",
+            "dataFabricacao" : "2019-01-01 18:00:00"
+        },
+        {
+            "nome" : "Farinha", 
+            "unidadeMedida" : "Quilograma", 
+            "quantidade" : 10, 
+            "preco" : 4.00, 
+            "perecivel" : true, 
+            "dataValidade" : "2020-01-01 18:00:00",
+            "dataFabricacao" : "2019-01-01 18:00:00"
+        },
+        {
+            "nome" : "Colher", 
+            "unidadeMedida" : "Unidade", 
+            "quantidade" : 10, 
+            "preco" : 5.00, 
+            "perecivel" : false, 
+            "dataValidade" : "2029-01-01 18:00:00",
+            "dataFabricacao" : "2019-01-01 18:00:00"
+        }
+        
+    ]
+}

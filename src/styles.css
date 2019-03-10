@@ -1,0 +1,13 @@
+body .ui-breadcrumb {
+    margin: 0px 0 20px 0;
+    border-width: 1px 0 0 0;
+}
+
+body h2 {
+	font-weight: normal;
+	font-size: 18px;
+}
+
+.ui-button-secondary.ui-widget {
+	margin-bottom: 10px;
+}
