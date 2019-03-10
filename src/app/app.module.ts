@@ -13,13 +13,21 @@ import {MenuItem} from 'primeng/api';
 import {SidebarModule} from 'primeng/sidebar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
-
+import { AppRoutingModule } from './app-routing.module';
+import { FormComponent } from './form.component';
+import { ListComponent } from './list.component';
+import {DropdownModule} from 'primeng/dropdown';
+import {SpinnerModule} from 'primeng/spinner';
+import {ToggleButtonModule} from 'primeng/togglebutton';
+import {InputMaskModule} from 'primeng/inputmask';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        FormComponent,
+        ListComponent
     ],
     imports: [
         BrowserModule,
@@ -30,10 +38,15 @@ import { AppComponent } from './app.component';
         InputTextModule,
         DialogModule,
         ButtonModule,
+        DropdownModule,
         BreadcrumbModule,
         MenuModule,
         SidebarModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        AppRoutingModule,
+        SpinnerModule,
+        ToggleButtonModule,
+        InputMaskModule
     ],
     providers: [],
     bootstrap: [AppComponent]

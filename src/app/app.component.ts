@@ -27,108 +27,31 @@ export class PrimeProduto implements Produto {
 })
 export class AppComponent implements OnInit {
 
-    displayDialog: boolean;
-
-    produto: Produto = new PrimeProduto();
-
-    selectedProduto: Produto;
-
-    newProduto: boolean;
-
-    produtos: Produto[];
-
     menus: MenuItem[];
 
     home: MenuItem;
-
-    crumbs: MenuItem[];
-
-    cols: any[];
 
     visibleSidebar;
 
     constructor(private produtoService: ProdutoService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
-        this.produtoService.getProdutosSmall().then(produtos => this.produtos = produtos);
-
-        this.cols = [
-            { field: 'nome', header: 'Nome do item' },
-            { field: 'unidadeMedida', header: 'Unidade de medida' },
-            { field: 'quantidade', header: 'Quantidade' },
-            { field: 'preco', header: 'Preço' },
-            { field: 'perecivel', header: 'Produto perecível?' },
-            { field: 'dataValidade', header: 'Data de validade' },
-            { field: 'dataFabricacao', header: 'Data de fabricação' }
-        ];
-
-        this.crumbs = [
-            { 'label': 'Produtos' }
-        ];
-
+      
         this.home = {icon: 'pi pi-home'};
 
         this.menus = [
-            { 'label': 'Listar',  'icon' : 'pi pi-fw pi-list'},
-            { 'label': 'Cadastrar',  'icon' : 'pi pi-fw pi-pencil'}
-        ];         
-        //'routerLink' : ['/'],
-    }
+            { 'label': 'Listar',  'icon' : 'pi pi-fw pi-list', 'routerLink': '/'},
+            { 'label': 'Cadastrar',  'icon' : 'pi pi-fw pi-pencil', 'routerLink': '/cadastrar'}
+        ];    
 
-    showDialogToAdd() {
-        this.newProduto = true;
-        this.produto = new PrimeProduto();
-        this.displayDialog = true;
-
-        this.crumbs = [
-            { 'label': 'Produtos' },
-            { 'label': 'Adicionar' }
-        ];
-
-        this.home = {icon: 'pi pi-home'};
-    }
-
-    save() {
-        const produtos = [...this.produtos];
-        if (this.newProduto) {
-            produtos.push(this.produto);
-        } else {
-            produtos[this.findSelectedProdutoIndex()] = this.produto;
+        if (typeof(Storage) !== "undefined") {
+            localStorage.setItem('unidadesMedida', JSON.stringify([
+            {label:'Litro', value:{id:1, nome: 'Litro', abbr: 'lt'}},
+            {label:'Quilograma', value:{id:2, nome: 'Quilograma', abbr: 'kg'}},
+            {label:'Unidade', value:{id:3, nome: 'Unidade', abbr: 'un'}}
+        ]));
         }
-        this.produtos = produtos;
-        this.produto = null;
-        this.displayDialog = false;
-    }
 
-    delete() {
-        const index = this.findSelectedProdutoIndex();
-        this.produtos = this.produtos.filter((val, i) => i !== index);
-        this.produto = null;
-        this.displayDialog = false;
-    }
-
-    onRowSelect(event) {
-        this.newProduto = false;
-        this.produto = {...event.data};
-        this.displayDialog = true;
-
-        this.crumbs = [
-            { 'label': 'Produtos' },
-            { 'label': 'Editar' },
-            { 'label': this.produto.nome }
-        ];
-    }
-
-    findSelectedProdutoIndex(): number {
-        return this.produtos.indexOf(this.selectedProduto);
-    }
-
-    confirm() {
-        this.confirmationService.confirm({
-            message: 'Você deseja mesmo excluir esse item?',
-            accept: () => {
-                this.delete();
-            }
-        });
-    }
+        
+    }     
 }

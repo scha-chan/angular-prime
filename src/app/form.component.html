@@ -1,0 +1,60 @@
+<p-breadcrumb [model]="breadcrumbs" [home]="home"></p-breadcrumb>
+
+<div class="ui-g-12 ui-md-8 ui-md-offset-2">
+    <div class="ui-g ui-fluid" *ngIf="produto">
+        <div class="ui-g-12">
+            <label for="nome">Nome do item:</label>
+            <input pInputText id="nome" [(ngModel)]="produto.nome" required />
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+            <label for="unidadeMedida">Unidade de medida:</label>
+            <p-dropdown [options]="unidadesMedida" [(ngModel)]="produto.unidadeMedida" required ></p-dropdown>
+        </div>
+
+        <div class="ui-g-12 ui-md-6">
+            <label for="quantidade">Quantidade:</label>
+            <div class="ui-inputgroup">                
+                <input pInputText id="quantidade" [(ngModel)]="produto.quantidade" placeholder="0" required
+                (keyup)="validateInputQtd(this)" /> 
+                <span class="ui-inputgroup-addon">{{ produto.unidadeMedida.abbr }}</span>    
+            </div>
+        </div>        
+
+        <div class="ui-g-12 ui-md-6">
+            <label for="preco">Preço:</label>         
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon">R$</span>
+                <input pInputText id="preco" [(ngModel)]="produto.preco" placeholder="0,00" required
+                (keyup)="validateInputPreco(this)" />     
+            </div>            
+        </div>    
+
+        <div class="ui-g-12 ui-md-6">
+            <label for="perecivel">Produto perecível?</label>
+            <p-toggleButton id="perecivel" onLabel="Sim" offLabel="Não" 
+            onIcon="pi pi-check" offIcon="pi pi-times" [(ngModel)]="produto.perecivel"></p-toggleButton>
+        </div>    
+
+        <div class="ui-g-12 ui-md-6">
+            <label for="dataValidade">Data de validade:</label>
+            <p-inputMask  id="dataValidade" [(ngModel)]="produto.dataValidade" 
+             mask="99/99/9999" slotChar="dd/mm/yyyy" required></p-inputMask>
+        </div>   
+
+        <div class="ui-g-12 ui-md-6">
+            <label for="dataFabricacao">Data de fabricação:</label>
+            <p-inputMask id="dataFabricacao" [(ngModel)]="produto.dataFabricacao" 
+             mask="99/99/9999" slotChar="dd/mm/yyyy" required></p-inputMask>
+        </div>   
+
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">            
+            <button type="button" pButton icon="pi pi-save" (click)="save()" label=" Salvar"></button>
+        </div>
+    </p-footer>
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+

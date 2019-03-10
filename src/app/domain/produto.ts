@@ -1,4 +1,5 @@
 export interface Produto {
+	id?;
     nome?;
     unidadeMedida?;
     quantidade?;
