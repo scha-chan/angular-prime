@@ -143,7 +143,7 @@ export class FormComponent implements OnInit {
             //         valid = false;
             //         this.messageService.add({severity:'warning', summary:'Aviso', detail:'A data de validade deve ser maior que a data de fabricação!'});
             //     }
-            // }
+            }
         }
         return valid;
     }
