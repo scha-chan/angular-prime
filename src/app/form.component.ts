@@ -137,6 +137,13 @@ export class FormComponent implements OnInit {
         if (!this.produto.dataValidade) {
             valid = false;
             this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha a data de validade!'});
+        } else {
+            if (valid) {                
+            //     if (this.produto.dataFabricacao > this.produto.dataValidade) {
+            //         valid = false;
+            //         this.messageService.add({severity:'warning', summary:'Aviso', detail:'A data de validade deve ser maior que a data de fabricação!'});
+            //     }
+            // }
         }
         return valid;
     }

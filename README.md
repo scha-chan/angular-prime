@@ -6,6 +6,10 @@ Provavelmente esqueci de fazer --save nos pacotes instalados com o npm, deve ger
 
 Devido ao curto prazo, faltou executar os seguintes ajustes:
 
+- Limitar as datas para não passar do prazo e carrega-las no formato correto.
+
+- Validar a quantidade integer e decimal e carrega-los no formato correto.
+
 - Aplicar um equivalente ao plugin datepicker nas datas.
 
 - Aplicar máscara decimal nos valores, não consegui gerar com o PrimeNG e o Ng2InputMaskModule não está sendo compatível com minha versão, não tive tempo para realizar mais pesquisas.
@@ -18,5 +22,5 @@ Devido ao curto prazo, faltou executar os seguintes ajustes:
 
 - Ajustar a aparência da tabela em dispositivos móveis para ficar mais agradável.
 
-- Inicializar o addon da unidade de medida em novos cadastros
+- Inicializar o addon da unidade de medida em novos cadastros.
 
