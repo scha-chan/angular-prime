@@ -4,19 +4,19 @@
     <div class="ui-g ui-fluid" *ngIf="produto">
         <div class="ui-g-12">
             <label for="nome">Nome do item:</label>
-            <input pInputText id="nome" [(ngModel)]="produto.nome" required />
+            <input pInputText id="nome" [(ngModel)]="produto.nome"  />
         </div>
 
         <div class="ui-g-12 ui-md-6">
             <label for="unidadeMedida">Unidade de medida:</label>
-            <p-dropdown [options]="unidadesMedida" [(ngModel)]="produto.unidadeMedida" required ></p-dropdown>
+            <p-dropdown [options]="unidadesMedida" [(ngModel)]="produto.unidadeMedida" ></p-dropdown>
         </div>
 
         <div class="ui-g-12 ui-md-6">
             <label for="quantidade">Quantidade:</label>
             <div class="ui-inputgroup">                
-                <input pInputText id="quantidade" [(ngModel)]="produto.quantidade" placeholder="0" required
-                (keyup)="validateInputQtd(this)" /> 
+                <input pInputText id="quantidade" [(ngModel)]="produto.quantidade" placeholder="0" 
+                 (keyup)="validateInputQtd()"  /> 
                 <span class="ui-inputgroup-addon">{{ produto.unidadeMedida.abbr }}</span>    
             </div>
         </div>        
@@ -25,8 +25,7 @@
             <label for="preco">Preço:</label>         
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon">R$</span>
-                <input pInputText id="preco" [(ngModel)]="produto.preco" placeholder="0,00" required
-                (keyup)="validateInputPreco(this)" />     
+                <input pInputText id="preco" [(ngModel)]="produto.preco" placeholder="0,00" (keyup)="validateInputPreco()"  />     
             </div>            
         </div>    
 
@@ -50,6 +49,9 @@
 
     </div>
     <p-footer>
+
+        <p-messages [(value)]="msgs"></p-messages>
+
         <div class="ui-dialog-buttonpane ui-helper-clearfix">            
             <button type="button" pButton icon="pi pi-save" (click)="save()" label=" Salvar"></button>
         </div>

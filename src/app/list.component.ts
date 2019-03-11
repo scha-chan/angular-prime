@@ -61,7 +61,7 @@ export class ListComponent implements OnInit {
 
         this.cols = [
             { field: 'nome', header: 'Nome do item' },
-            { field: 'unidadeMedida.nome', header: 'Unidade de medida' },
+            { field: 'unidadeMedida', subfield : 'nome', header: 'Unidade de medida' },
             { field: 'quantidade', header: 'Quantidade' },
             { field: 'preco', header: 'Preço' },
             { field: 'perecivel', header: 'Produto perecível?' },
@@ -107,5 +107,23 @@ export class ListComponent implements OnInit {
     editar(item) {
         this.router.navigate(['editar/'+item.id]);
     }
+
+    getCellData(row: any, col: any) {
+        let value = row[col.field];
+        if (col.field == 'unidadeMedida') {
+            return row[col.field].nome
+        }
+        if (col.field == 'preco') {
+            return 'R$ ' + row[col.field];
+        }
+        if (col.field == 'perecivel') {
+            return row[col.field] == true ? 'Sim' : 'Não' ;
+        }
+        if (col.field == 'quantidade') {
+            return row[col.field] + ' ' +row['unidadeMedida'].abbr ;
+        }
+       return row[col.field];
+     }
+
 
 }

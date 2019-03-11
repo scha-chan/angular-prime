@@ -30,6 +30,14 @@ label {
 	margin-bottom: 5px;
 }
 
+table tr td {
+	cursor: pointer;
+}
+
+table tr td:last-child {
+	cursor: auto;
+}
+
 table .ui-button-secondary {
 	margin-bottom: 0px;
 }
@@ -48,19 +56,4 @@ p-footer {
 	text-align: center;
 	padding-top: 10px;
 	display: block;
-}
-
-
-/* bootstrap 3 media querys */
-@media(max-width:767px){
-
-}
-@media(min-width:768px){
-
-}
-@media(min-width:992px){
-
-}
-@media(min-width:1200px){
-	
 }

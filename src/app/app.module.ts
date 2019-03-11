@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
@@ -20,6 +20,11 @@ import {DropdownModule} from 'primeng/dropdown';
 import {SpinnerModule} from 'primeng/spinner';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {InputMaskModule} from 'primeng/inputmask';
+//import {Validators,FormControl,FormGroup,FormBuilder} from '@angular/forms';
+import {MessageService} from 'primeng/api';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+//import { Ng2InputMaskModule } from 'ng2-input-mask';
 
 import { AppComponent } from './app.component';
 
@@ -46,7 +51,10 @@ import { AppComponent } from './app.component';
         AppRoutingModule,
         SpinnerModule,
         ToggleButtonModule,
-        InputMaskModule
+        InputMaskModule,
+        //Ng2InputMaskModule,
+        MessagesModule,
+        MessageModule
     ],
     providers: [],
     bootstrap: [AppComponent]

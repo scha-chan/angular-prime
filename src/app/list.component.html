@@ -10,9 +10,9 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr [pSelectableRow]="rowData" >
+        <tr >
             <td *ngFor="let col of columns" (click)="editar(rowData)">
-                {{rowData[col.field]}}
+                {{ getCellData(rowData, col) }}
             </td>
             <td>
                 <button type="button" pButton icon="pi pi-trash" class="ui-button-secondary" label=" Remover" (click)="confirmDelete(rowData)"></button>
