@@ -9,14 +9,13 @@
 
         <div class="ui-g-12 ui-md-6">
             <label for="unidadeMedida">Unidade de medida:</label>
-            <p-dropdown [options]="unidadesMedida" [(ngModel)]="produto.unidadeMedida" ></p-dropdown>
+            <p-dropdown [options]="unidadesMedida" [(ngModel)]="produto.unidadeMedida" (onChange)="onChange($event)"></p-dropdown>
         </div>
 
         <div class="ui-g-12 ui-md-6">
             <label for="quantidade">Quantidade:</label>
-            <div class="ui-inputgroup">                
-                <input pInputText id="quantidade" [(ngModel)]="produto.quantidade" placeholder="0" 
-                 (keyup)="validateInputQtd()"  /> 
+            <div class="ui-inputgroup">  
+                 <input pInputText id="quantidade" [(ngModel)]="produto.quantidade" placeholder=""  currencyMask [(ngModel)]="value" [options]="maskQtd" />    
                 <span class="ui-inputgroup-addon">{{ produto.unidadeMedida.abbr }}</span>    
             </div>
         </div>        
@@ -25,7 +24,6 @@
             <label for="preco">Preço:</label>         
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon">R$</span>
-
                 <input pInputText id="preco" [(ngModel)]="produto.preco" placeholder="0,00"  currencyMask [(ngModel)]="value" [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left' }" />     
             </div>            
         </div>    

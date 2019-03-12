@@ -106,13 +106,7 @@ export class FormComponent implements OnInit {
             ];        
         }
 
-        if (this.produto.unidadeMedida.id == 3) {
-            this.maskQtd = '';
-        } else {
-            /* Deveria ser utilizada a máscara do Ng2InputMaskModule, 
-            mas, não deu tempo de configura-lo :( */
-            this.maskQtd = '#.###.##9,9##';
-        }            
+        this.setMaskQtd();           
         
         this.home = {icon: 'pi pi-home', 'routerLink' : '/'};
 
@@ -182,11 +176,15 @@ export class FormComponent implements OnInit {
         return this.produtos.indexOf(this.selectedProduto);
     } 
 
-    validateInputQtd() {           
+    onChange(event) {
+        this.setMaskQtd();
+    }
+
+    setMaskQtd() {
         if (this.produto.unidadeMedida.id == 3) {
-            this.produto.quantidade = this.produto.quantidade.replace(/[^0-9]/g, '');
+            this.maskQtd = { prefix: '', thousands: '.', decimal: ',', align: 'left', precision:0 };
         } else {
-            this.produto.quantidade = this.produto.quantidade.replace(/[^0-9.,]/g, '');
-        }
-    }       
+            this.maskQtd = { prefix: '', thousands: '.', decimal: ',', align: 'left', precision:3 };
+        } 
+    }    
 }
