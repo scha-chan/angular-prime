@@ -188,8 +188,5 @@ export class FormComponent implements OnInit {
         } else {
             this.produto.quantidade = this.produto.quantidade.replace(/[^0-9.,]/g, '');
         }
-    } 
-    validateInputPreco() {    
-        this.produto.preco = this.produto.preco.replace(/[^0-9.,]/g, '');
     }       
 }
