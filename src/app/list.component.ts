@@ -7,6 +7,7 @@ import {MenuItem} from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 export class PrimeProduto implements Produto {
     constructor(
@@ -24,7 +25,7 @@ export class PrimeProduto implements Produto {
     selector: 'app-list',
     templateUrl: './list.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [ProdutoService, ConfirmationService]
+    providers: [ProdutoService, ConfirmationService, DatePipe]
 })
 export class ListComponent implements OnInit {
 
@@ -51,7 +52,8 @@ export class ListComponent implements OnInit {
     constructor(
         private produtoService: ProdutoService, 
         private confirmationService: ConfirmationService,
-        private router: Router) { }
+        private router: Router,
+        private datePipe: DatePipe) { }
 
     ngOnInit() {
 
@@ -122,6 +124,14 @@ export class ListComponent implements OnInit {
         if (col.field == 'quantidade') {
             return row[col.field] + ' ' +row['unidadeMedida'].abbr ;
         }
+        if (col.field == 'dataValidade') {
+            let date = new Date(row[col.field]);
+            return  this.datePipe.transform(date, 'dd/MM/yyyy'); ;
+        } 
+        if (col.field == 'dataFabricacao') {
+            let date = new Date(row[col.field]);
+            return  this.datePipe.transform(date, 'dd/MM/yyyy'); ;
+        } 
        return row[col.field];
      }
 

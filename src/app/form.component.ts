@@ -9,6 +9,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, ActivatedRoute, RouterStat
 //import {Validators,FormControl,FormGroup,FormBuilder} from '@angular/forms';
 import {Message} from 'primeng//api';
 import {MessageService} from 'primeng/api';
+import {CalendarModule} from 'primeng/calendar';
 
 export class PrimeProduto implements Produto {
     constructor(
@@ -53,7 +54,7 @@ export class FormComponent implements OnInit {
 
     msgs: any[];
 
-    //produtoform: FormGroup;
+    en: any;
 
     maskQtd;
 
@@ -94,6 +95,8 @@ export class FormComponent implements OnInit {
                 });
                 if (produto) {
                     this.produto = produto[0];
+                    this.produto.dataFabricacao = new Date(this.produto.dataFabricacao);
+                    this.produto.dataValidade = new Date(this.produto.dataValidade);
                 }                
             } else {
                 this.produto.unidadeMedida = this.unidadesMedida[1];
@@ -110,8 +113,19 @@ export class FormComponent implements OnInit {
             this.maskQtd = '#.###.##9,9##';
         }            
         
-
         this.home = {icon: 'pi pi-home', 'routerLink' : '/'};
+
+        this.en = {
+            firstDayOfWeek: 0,
+            dayNames: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+            dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+            dayNamesMin:  ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+            monthNames: [ "Janeiro","Fevereiro","Março","April","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" ],
+            monthNamesShort: [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun","Jul", "Ago", "Set", "Out", "Nov", "Dec" ],
+            today: 'Today',
+            clear: 'Clear',
+            dateFormat: 'dd/mm/yy'
+        };        
         
     } 
 
@@ -136,14 +150,7 @@ export class FormComponent implements OnInit {
         }
         if (!this.produto.dataValidade) {
             valid = false;
-            this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha a data de validade!'});
-        } else {
-            if (valid) {                
-            //     if (this.produto.dataFabricacao > this.produto.dataValidade) {
-            //         valid = false;
-            //         this.messageService.add({severity:'warning', summary:'Aviso', detail:'A data de validade deve ser maior que a data de fabricação!'});
-            //     }
-            }
+            this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha a data de validade!'});           
         }
         return valid;
     }

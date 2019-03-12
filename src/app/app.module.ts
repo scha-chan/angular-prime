@@ -24,8 +24,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {MessageService} from 'primeng/api';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-//import { Ng2InputMaskModule } from 'ng2-input-mask';
-
+import {CalendarModule} from 'primeng/calendar';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -52,9 +51,9 @@ import { AppComponent } from './app.component';
         SpinnerModule,
         ToggleButtonModule,
         InputMaskModule,
-        //Ng2InputMaskModule,
         MessagesModule,
-        MessageModule
+        MessageModule,
+        CalendarModule
     ],
     providers: [],
     bootstrap: [AppComponent]

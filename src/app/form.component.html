@@ -37,14 +37,14 @@
 
         <div class="ui-g-12 ui-md-6">
             <label for="dataValidade">Data de validade:</label>
-            <p-inputMask  id="dataValidade" [(ngModel)]="produto.dataValidade" 
-             mask="99/99/9999" slotChar="dd/mm/yyyy" required></p-inputMask>
+             <p-calendar id="dataValidade" [(ngModel)]="produto.dataValidade" [locale]="en" 
+             [maxDate]="produto.dataFabricacao" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
         </div>   
 
         <div class="ui-g-12 ui-md-6">
             <label for="dataFabricacao">Data de fabricação:</label>
-            <p-inputMask id="dataFabricacao" [(ngModel)]="produto.dataFabricacao" 
-             mask="99/99/9999" slotChar="dd/mm/yyyy" required></p-inputMask>
+            <p-calendar id="dataFabricacao" [(ngModel)]="produto.dataFabricacao" [locale]="en" 
+            [minDate]="produto.dataValidade" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
         </div>   
 
     </div>
