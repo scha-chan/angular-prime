@@ -142,7 +142,6 @@ export class FormComponent implements OnInit {
         }
         if (!this.produto.preco) {
             valid = false;
-
             this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha o preço!'});
         }
         if (!this.produto.dataFabricacao) {
@@ -192,12 +191,5 @@ export class FormComponent implements OnInit {
     } 
     validateInputPreco() {    
         this.produto.preco = this.produto.preco.replace(/[^0-9.,]/g, '');
-    }   
-
-    onSubmit(value: string) {
-        this.submitted = true;
-        this.messageService.add({severity:'info', summary:'Success', detail:'Cadastrado com sucesso!'});
-    }
-
-    
+    }       
 }

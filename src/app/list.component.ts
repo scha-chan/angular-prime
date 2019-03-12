@@ -116,7 +116,7 @@ export class ListComponent implements OnInit {
             return row[col.field].nome
         }
         if (col.field == 'preco') {
-            return 'R$ ' + row[col.field];
+            return this.getFormattedPrice(row[col.field]);
         }
         if (col.field == 'perecivel') {
             return row[col.field] == true ? 'Sim' : 'Não' ;
@@ -135,5 +135,8 @@ export class ListComponent implements OnInit {
        return row[col.field];
      }
 
+    getFormattedPrice(price: number) {
+        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price);
+    }
 
 }
