@@ -27,6 +27,7 @@
     "angular-font-awesome": "^3.1.2",
     "angular2-text-mask": "^9.0.0",
     "core-js": "^2.5.4",
+    "ng2-currency-mask": "^5.3.1",
     "ng2-datepicker": "^3.1.1",
     "ng2-input-mask": "0.0.7",
     "primeicons": "1.0.0",

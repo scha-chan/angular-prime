@@ -57,3 +57,7 @@ p-footer {
 	padding-top: 10px;
 	display: block;
 }
+
+#preco{
+	text-align: left !important;
+}

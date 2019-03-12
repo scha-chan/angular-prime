@@ -26,6 +26,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {CalendarModule} from 'primeng/calendar';
 import { AppComponent } from './app.component';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
     declarations: [
@@ -53,7 +54,8 @@ import { AppComponent } from './app.component';
         InputMaskModule,
         MessagesModule,
         MessageModule,
-        CalendarModule
+        CalendarModule,
+        CurrencyMaskModule
     ],
     providers: [],
     bootstrap: [AppComponent]

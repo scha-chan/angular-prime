@@ -25,7 +25,8 @@
             <label for="preco">Preço:</label>         
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon">R$</span>
-                <input pInputText id="preco" [(ngModel)]="produto.preco" placeholder="0,00" (keyup)="validateInputPreco()"  />     
+
+                <input pInputText id="preco" [(ngModel)]="produto.preco" placeholder="0,00"  currencyMask [(ngModel)]="value" [options]="{ prefix: '', thousands: '.', decimal: ',' }" />     
             </div>            
         </div>    
 
