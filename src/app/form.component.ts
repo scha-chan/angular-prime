@@ -106,8 +106,6 @@ export class FormComponent implements OnInit {
             ];        
         }
 
-        console.log(this.produto);
-
         if (this.produto.unidadeMedida.id == 3) {
             this.maskQtd = '';
         } else {
