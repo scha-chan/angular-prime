@@ -26,7 +26,7 @@
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon">R$</span>
 
-                <input pInputText id="preco" [(ngModel)]="produto.preco" placeholder="0,00"  currencyMask [(ngModel)]="value" [options]="{ prefix: '', thousands: '.', decimal: ',' }" />     
+                <input pInputText id="preco" [(ngModel)]="produto.preco" placeholder="0,00"  currencyMask [(ngModel)]="value" [options]="{ prefix: '', thousands: '.', decimal: ',', align: 'left' }" />     
             </div>            
         </div>    
 

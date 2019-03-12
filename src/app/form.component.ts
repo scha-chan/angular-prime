@@ -83,7 +83,7 @@ export class FormComponent implements OnInit {
 
         if (!this.id) {
             this.newProduto = true;
-            this.produto.unidadeMedida = this.unidadesMedida[1];
+            this.produto.unidadeMedida = this.unidadesMedida[0].value;
             this.breadcrumbs = [
                 { 'label': 'Cadastrar' }
             ];
@@ -99,12 +99,15 @@ export class FormComponent implements OnInit {
                     this.produto.dataValidade = new Date(this.produto.dataValidade);
                 }                
             } else {
-                this.produto.unidadeMedida = this.unidadesMedida[1];
+                this.produto.unidadeMedida = this.unidadesMedida[0].value;
             }    
             this.breadcrumbs = [
                 { 'label': 'Editar' }
             ];        
         }
+
+        console.log(this.produto);
+
         if (this.produto.unidadeMedida.id == 3) {
             this.maskQtd = '';
         } else {
