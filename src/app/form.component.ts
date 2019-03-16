@@ -6,7 +6,6 @@ import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 import {SelectItem} from 'primeng/api';
 import { Router, CanActivate, ActivatedRouteSnapshot, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
-//import {Validators,FormControl,FormGroup,FormBuilder} from '@angular/forms';
 import {Message} from 'primeng//api';
 import {MessageService} from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
@@ -32,35 +31,66 @@ export class PrimeProduto implements Produto {
 })
 export class FormComponent implements OnInit {
 
-    displayDialog: boolean;
-
+    /**
+    * Inicialização de um novo produto
+    */
     produto: Produto = new PrimeProduto();
 
-    selectedProduto: Produto;
-
+    /**
+    * Define se é um produto novo
+    */
     newProduto: boolean;
 
+    /**
+    * Produto cadastrados
+    */
     produtos: Produto[];
 
+    /**
+    * Define se irá apresentar link para a home no breadcrumb
+    */
     home: MenuItem;
 
-    submitted: boolean;
-
+    /**
+    * Gera os breadcrumbs
+    */
     breadcrumbs: MenuItem[];
 
+    /**
+    * Lista de unidades de medida para seleção
+    */
     unidadesMedida: SelectItem[];
 
+    /**
+    * Define a visibilidade do menu lateral
+    */
     visibleSidebar;
 
+    /**
+    * Armazena as mensagens do formulário
+    */
     msgs: any[];
 
+    /**
+    * Armazena a tradução do calendário
+    */
     en: any;
 
+    /**
+    * Define o tipo de máscara do campo quantidade
+    */
     maskQtd;
 
+    /**
+    * ID do item
+    */
     id: number;
-    private sub: any;
 
+    private substractId: any;
+
+    /**
+    * Cria uma instância 
+    */
     constructor(
         private produtoService: ProdutoService, 
         private router: Router,
@@ -68,6 +98,12 @@ export class FormComponent implements OnInit {
         //private fb: FormBuilder, 
         private messageService: MessageService) { }
 
+    /**
+    * // TODO: comment ngOnInit
+    * Este método inicializa o componente
+    * @param null
+    * @returns null
+    */ 
     ngOnInit() {
 
         this.produtos = JSON.parse(localStorage.getItem('produtos'));
@@ -77,7 +113,7 @@ export class FormComponent implements OnInit {
             this.produtos = [];
         }
 
-        this.sub = this.route.params.subscribe(params => {
+        this.substractId = this.route.params.subscribe(params => {
            this.id = params['id']; 
         });
 
@@ -124,6 +160,12 @@ export class FormComponent implements OnInit {
         
     } 
 
+    /**
+    * // TODO: comment validateFields
+    * Este método valida os campos do cadastro
+    * @param null
+    * @returns null
+    */    
     validateFields() {
         var valid = true;
         if (!this.produto.nome) {
@@ -149,11 +191,14 @@ export class FormComponent implements OnInit {
         return valid;
     }
 
+    /**
+    * // TODO: comment save
+    * Este método chama a validação e salva os dados do formulário no localstorage
+    * @param null
+    * @returns null
+    */ 
     save() {
 
-        /* Não consegui configurar a ferramenta de validação por isso está manual :(  
-            Faltou tempo para testar as possibilidades
-        */
         var valid = this.validateFields();
 
         if (valid){
@@ -162,6 +207,7 @@ export class FormComponent implements OnInit {
                 this.produtos.push(this.produto);
             } else {
                 this.produtos[this.findSelectedProdutoIndex()] = this.produto;
+                console.log(this.findSelectedProdutoIndex());
             }
             this.produto = null;
 
@@ -170,16 +216,34 @@ export class FormComponent implements OnInit {
             }
             this.router.navigate(['/']);
         }        
-    }    
+    }   
 
+    /**
+    * // TODO: comment findSelectedProdutoIndex
+    * Este método busca um object através do índice no array
+    * @param null
+    * @returns object
+    */  
     findSelectedProdutoIndex(): number {
-        return this.produtos.indexOf(this.selectedProduto);
+        return this.produtos.indexOf(this.produto);
     } 
 
+    /**
+    * // TODO: comment onChange
+    * Este método é chamado no onChange do select no formulário
+    * @param event object
+    * @returns null
+    */  
     onChange(event) {
         this.setMaskQtd();
     }
 
+    /**
+    * // TODO: comment setMaskQtd
+    * Este método mostra a máscara inteira ou decimal no campo de quantidade conforme a unidade de medida
+    * @param event object
+    * @returns null
+    */ 
     setMaskQtd() {
         if (this.produto.unidadeMedida.id == 3) {
             this.maskQtd = { prefix: '', thousands: '.', decimal: ',', align: 'left', precision:0 };

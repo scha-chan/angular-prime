@@ -27,14 +27,32 @@ export class PrimeProduto implements Produto {
 })
 export class AppComponent implements OnInit {
 
+    /**
+    * Gera os menus
+    */
     menus: MenuItem[];
 
+    /**
+    * Define se irá apresentar link para a home no breadcrumb
+    */
     home: MenuItem;
 
+    /**
+    * Define a visibilidade do menu lateral
+    */
     visibleSidebar;
 
+    /**
+    * Cria uma instância 
+    */
     constructor(private produtoService: ProdutoService, private confirmationService: ConfirmationService) { }
 
+    /**
+    * // TODO: comment ngOnInit
+    * Este método inicializa o componente
+    * @param null
+    * @returns null
+    */ 
     ngOnInit() {
       
         this.home = {icon: 'pi pi-home'};
