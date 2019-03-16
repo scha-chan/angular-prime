@@ -11,7 +11,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr >
-            <td *ngFor="let col of columns" (click)="editar(rowData)">
+            <td *ngFor="let col of columns" (click)="edit(rowData)">
                 {{ getCellData(rowData, col) }}
             </td>
             <td>

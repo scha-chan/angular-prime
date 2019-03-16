@@ -8,6 +8,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 
 export class PrimeProduto implements Produto {
     constructor(
@@ -25,7 +26,7 @@ export class PrimeProduto implements Produto {
     selector: 'app-list',
     templateUrl: './list.component.html',
     styleUrls: ['./app.component.css'],
-    providers: [ProdutoService, ConfirmationService, DatePipe]
+    providers: [ProdutoService, ConfirmationService, DatePipe, DecimalPipe]
 })
 export class ListComponent implements OnInit {
 
@@ -34,8 +35,6 @@ export class ListComponent implements OnInit {
     produto: Produto = new PrimeProduto();
 
     selectedProduto: Produto;
-
-    newProduto: boolean;
 
     produtos: Produto[];
 
@@ -53,7 +52,8 @@ export class ListComponent implements OnInit {
         private produtoService: ProdutoService, 
         private confirmationService: ConfirmationService,
         private router: Router,
-        private datePipe: DatePipe) { }
+        private datePipe: DatePipe,
+        private decimalPipe: DecimalPipe) { }
 
     ngOnInit() {
 
@@ -85,13 +85,11 @@ export class ListComponent implements OnInit {
         if (typeof(Storage) !== "undefined") {
             localStorage.setItem('produtos', JSON.stringify(this.produtos));
         }
-    }
+    } 
 
-    onRowSelect(event) {
-        this.newProduto = false;
-        this.produto = {...event.data};
-        this.displayDialog = true;       
-    }
+    edit(item) {
+        this.router.navigate(['editar/'+item.id]);
+    }  
 
     findSelectedProdutoIndex(): number {
         return this.produtos.indexOf(this.selectedProduto);
@@ -104,11 +102,7 @@ export class ListComponent implements OnInit {
                 this.delete(row);
             }
         });
-    }
-
-    editar(item) {
-        this.router.navigate(['editar/'+item.id]);
-    }
+    }    
 
     getCellData(row: any, col: any) {
         let value = row[col.field];
@@ -122,7 +116,11 @@ export class ListComponent implements OnInit {
             return row[col.field] == true ? 'Sim' : 'Não' ;
         }
         if (col.field == 'quantidade') {
-            return row[col.field] + ' ' +row['unidadeMedida'].abbr ;
+            let quantidade = row[col.field];
+            if (row['unidadeMedida'].id != 3) {
+                quantidade = this.getFormattedDecimal(quantidade);
+            }            
+            return quantidade + ' ' +row['unidadeMedida'].abbr ;
         }
         if (col.field == 'dataValidade') {
             let date = new Date(row[col.field]);
@@ -137,6 +135,11 @@ export class ListComponent implements OnInit {
 
     getFormattedPrice(price: number) {
         return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price);
+    }
+
+    getFormattedDecimal (value) {
+        value = this.decimalPipe.transform(value, '3.3-5');
+        return value.replace(new RegExp(',', 'g'),'-').replace('.',',').replace(new RegExp('-', 'g'),'.')
     }
 
 }
