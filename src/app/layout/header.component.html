@@ -1,0 +1,38 @@
+<p-breadcrumb [model]="breadcrumbs" [home]="home"></p-breadcrumb>
+
+<p-table [columns]="cols" [value]="produtos" selectionMode="single" [(selection)]="selectedProduto" (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [responsive]="true">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{col.header}}
+            </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr >
+            <td *ngFor="let col of columns" (click)="edit(rowData)">
+                {{ getCellData(rowData, col) }}
+            </td>
+            <td>
+                <button type="button" pButton icon="pi pi-trash" class="ui-button-secondary" label=" Remover" (click)="confirmDelete(rowData)"></button>
+            </td>         
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="summary" let-rowData>
+        <div >
+            <a routerLink="/cadastrar">
+                <button type="button" pButton icon="pi pi-plus" label="Adicionar"></button>
+            </a>            
+        </div>
+    </ng-template>
+</p-table>
+
+<p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <button type="button" pButton label="Não" (click)="cd.reject()"></button>
+        <button type="button" pButton label="Sim" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>           
+

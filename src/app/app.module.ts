@@ -27,12 +27,18 @@ import {MessageModule} from 'primeng/message';
 import {CalendarModule} from 'primeng/calendar';
 import { AppComponent } from './app.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { UsuarioComponent } from './usuario/usuario.component';
+import { DesafioComponent } from './desafio/desafio.component';
+import { ResultadoComponent } from './resultado/resultado.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         FormComponent,
-        ListComponent
+        ListComponent,
+        UsuarioComponent,
+        DesafioComponent,
+        ResultadoComponent
     ],
     imports: [
         BrowserModule,
