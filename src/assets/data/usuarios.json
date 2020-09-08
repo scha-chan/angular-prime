@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "id" : 1,
+            "nome" : "Fulano", 
+            "email" : "fulano@gmail.com", 
+            "telefone" : "(47) 3333-3333", 
+            "celular" : "(47) 99999-9999", 
+            "situacao" : "A", 
+            "dataNascimento" : "2000-01-01"  
+        },
+        {
+            "id" : 1,
+            "nome" : "Siclano", 
+            "email" : "siclano@gmail.com", 
+            "telefone" : "(47) 3333-3333", 
+            "celular" : "(47) 99999-9999", 
+            "situacao" : "A", 
+            "dataNascimento" : "1988-01-01"  
+        }        
+    ]
+}

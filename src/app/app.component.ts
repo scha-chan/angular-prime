@@ -1,23 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Produto } from './domain/produto';
 import { ProdutoService } from './services/produtoservice';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
-
-export class PrimeProduto implements Produto {
-    constructor(
-            public nome?,
-            public unidadeMedida?,
-            public quantidade?,
-            public preco?,
-            public perecivel?,
-            public dataValidade?,
-            public dataFabricacao?
-    ) {}
-}
 
 @Component({
     selector: 'app-root',
@@ -45,7 +32,10 @@ export class AppComponent implements OnInit {
     /**
     * Cria uma instância 
     */
-    constructor(private produtoService: ProdutoService, private confirmationService: ConfirmationService) { }
+    constructor(
+        private produtoService: ProdutoService, 
+        private confirmationService: ConfirmationService
+    ) { }
 
     /**
     * // TODO: comment ngOnInit
@@ -56,11 +46,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
       
         this.home = {icon: 'pi pi-home'};
-
-        this.menus = [
-            { 'label': 'Listar',  'icon' : 'pi pi-fw pi-list', 'routerLink': '/'},
-            { 'label': 'Cadastrar',  'icon' : 'pi pi-fw pi-pencil', 'routerLink': '/cadastrar'}
-        ];    
 
         if (typeof(Storage) !== "undefined") {
             localStorage.setItem('unidadesMedida', JSON.stringify([

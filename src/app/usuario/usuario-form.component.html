@@ -1,0 +1,57 @@
+<p-breadcrumb [model]="breadcrumbs" [home]="home"></p-breadcrumb>
+<div class="container">
+    <div class="row" *ngIf="usuario">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input pInputText id="nome" [(ngModel)]="usuario.nome" class="form-control"  />
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label for="nome">Email:</label>
+                <input pInputText id="nome" [(ngModel)]="usuario.email" class="form-control"  />
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group p-grid-col-12">
+                <label for="unidadeMedida">Unidade de medida:</label>
+                <p-dropdown  
+                [options]="unidadesMedida" [(ngModel)]="produto.unidadeMedida" (onChange)="onChange($event)"
+                autoWidth="false"
+                [style]="{'minWidth':'100%'}"
+                ></p-dropdown>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="nome">Quantidade:</label>
+                <input pInputText id="quantidade" [(ngModel)]="produto.quantidade" class="form-control"  />
+            </div>
+        </div>      
+        <div class="col-md-6">
+            <label for="dataValidade">Data de nascimento:</label>
+             <p-calendar id="dataValidade" [(ngModel)]="produto.dataValidade" [locale]="en" 
+             [maxDate]="produto.dataFabricacao" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+        </div>   
+
+        <div class="col-12 md-6">
+            <label for="dataFabricacao">Data de fabricação:</label>
+            <p-calendar id="dataFabricacao" [(ngModel)]="produto.dataFabricacao" [locale]="en" 
+            [minDate]="produto.dataValidade" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+        </div>   
+
+    </div>
+    <p-footer>
+
+        <p-messages [(value)]="msgs"></p-messages>
+
+        <div class="p-dialog-buttonpane p-helper-clearfix">            
+            <button type="button" pButton icon="pi pi-save" (click)="save()" label=" Salvar"></button>
+        </div>
+    </p-footer>
+</div>
+
+

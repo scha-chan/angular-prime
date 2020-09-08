@@ -14,31 +14,30 @@ import {SidebarModule} from 'primeng/sidebar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { AppRoutingModule } from './app-routing.module';
-import { FormComponent } from './form.component';
-import { ListComponent } from './list.component';
 import {DropdownModule} from 'primeng/dropdown';
 import {SpinnerModule} from 'primeng/spinner';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {InputMaskModule} from 'primeng/inputmask';
-//import {Validators,FormControl,FormGroup,FormBuilder} from '@angular/forms';
 import {MessageService} from 'primeng/api';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {CalendarModule} from 'primeng/calendar';
 import { AppComponent } from './app.component';
-import { CurrencyMaskModule } from "ng2-currency-mask";
-import { UsuarioComponent } from './usuario/usuario.component';
 import { DesafioComponent } from './desafio/desafio.component';
 import { ResultadoComponent } from './resultado/resultado.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { UsuarioModule } from 'src/app/usuario/usuario.module';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from 'src/app/layout/header.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        FormComponent,
-        ListComponent,
-        UsuarioComponent,
         DesafioComponent,
-        ResultadoComponent
+        ResultadoComponent,
+        NotfoundComponent,
+        LoginComponent,
+        HeaderComponent     
     ],
     imports: [
         BrowserModule,
@@ -57,11 +56,9 @@ import { ResultadoComponent } from './resultado/resultado.component';
         AppRoutingModule,
         SpinnerModule,
         ToggleButtonModule,
-        InputMaskModule,
-        MessagesModule,
-        MessageModule,
+        InputMaskModule, 
         CalendarModule,
-        CurrencyMaskModule
+        UsuarioModule
     ],
     providers: [],
     bootstrap: [AppComponent]

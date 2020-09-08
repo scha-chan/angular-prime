@@ -1,71 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { Produto } from './domain/produto';
-import { ProdutoService } from './services/produtoservice';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
-import {MenuModule} from 'primeng/menu';
-import {MenuItem} from 'primeng/api';
+import {MenuItem, SharedModule} from 'primeng/api';
 import {SelectItem} from 'primeng/api';
 import { Router, CanActivate, ActivatedRouteSnapshot, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import {Message} from 'primeng//api';
 import {MessageService} from 'primeng/api';
 import {CalendarModule} from 'primeng/calendar';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import * as moment from 'moment';
 
-export class PrimeProduto implements Produto {
-    constructor(
-            public id?,
-            public nome?,
-            public unidadeMedida?,
-            public quantidade?,
-            public preco?,
-            public perecivel?,
-            public dataValidade?,
-            public dataFabricacao?
-    ) {}
+export class UsuarioFormComponent implements Usuario {
+    constructor() {}
 }
 
 @Component({
-    selector: 'app-form',
-    templateUrl: './form.component.html',
-    styleUrls: ['./app.component.css'],
-    providers: [ProdutoService, MessageService]
+    selector: 'app-usuario-form',
+    templateUrl: './usuario-form.component.html',
+    styleUrls: ['./usuario.component.css'],
+    providers: [UsuarioService, MessageService]
 })
 export class FormComponent implements OnInit {
 
     /**
     * Inicialização de um novo produto
     */
-    produto: Produto = new PrimeProduto();
+    usuario: Usuario;
 
     /**
     * Define se é um produto novo
     */
-    newProduto: boolean;
+    newUser: boolean;
 
     /**
     * Produto cadastrados
     */
-    produtos: Produto[];
-
-    /**
-    * Define se irá apresentar link para a home no breadcrumb
-    */
-    home: MenuItem;
-
-    /**
-    * Gera os breadcrumbs
-    */
-    breadcrumbs: MenuItem[];
-
-    /**
-    * Lista de unidades de medida para seleção
-    */
-    unidadesMedida: SelectItem[];
-
-    /**
-    * Define a visibilidade do menu lateral
-    */
-    visibleSidebar;
-
+    usuarios: Usuario[];
+    
     /**
     * Armazena as mensagens do formulário
     */
@@ -77,22 +48,20 @@ export class FormComponent implements OnInit {
     en: any;
 
     /**
-    * Define o tipo de máscara do campo quantidade
-    */
-    maskQtd;
-
-    /**
     * ID do item
     */
     id: number;
 
     private substractId: any;
 
+    public home: MenuItem;
+    public breadcrumbs: MenuItem[];
+
     /**
     * Cria uma instância 
     */
     constructor(
-        private produtoService: ProdutoService, 
+        private usuarioService: UsuarioService, 
         private router: Router,
         private route: ActivatedRoute,
         //private fb: FormBuilder, 
@@ -106,11 +75,10 @@ export class FormComponent implements OnInit {
     */ 
     ngOnInit() {
 
-        this.produtos = JSON.parse(localStorage.getItem('produtos'));
-        this.unidadesMedida = JSON.parse(localStorage.getItem('unidadesMedida'));
+        this.usuarios = JSON.parse(localStorage.getItem('usuarios'));     
 
-        if (!this.produtos) {
-            this.produtos = [];
+        if (!this.usuarios) {
+            this.usuarios = [];
         }
 
         this.substractId = this.route.params.subscribe(params => {
@@ -118,31 +86,26 @@ export class FormComponent implements OnInit {
         });
 
         if (!this.id) {
-            this.newProduto = true;
-            this.produto.unidadeMedida = this.unidadesMedida[0].value;
+            this.newUser = true;      
             this.breadcrumbs = [
                 { 'label': 'Cadastrar' }
             ];
         } else {
-            this.newProduto = false;
-            if (this.produtos.length) {
-                var produto = this.produtos.filter(obj => {
-                  return obj.id.toString() === this.id.toString()
+            this.newUser = false;
+            if (this.usuarios.length) {
+                var usuario = this.usuarios.filter(obj => {
+                  return obj.id === this.id
                 });
-                if (produto) {
-                    this.produto = produto[0];
-                    this.produto.dataFabricacao = new Date(this.produto.dataFabricacao);
-                    this.produto.dataValidade = new Date(this.produto.dataValidade);
-                }                
-            } else {
-                this.produto.unidadeMedida = this.unidadesMedida[0].value;
+                if (usuario) {
+                    this.usuario = usuario[0];
+                    this.usuario.dataNascimento = moment(this.usuario.dataNascimento).toDate();       
+                               
+                }      
             }    
             this.breadcrumbs = [
                 { 'label': 'Editar' }
             ];        
         }
-
-        this.setMaskQtd();           
         
         this.home = {icon: 'pi pi-home', 'routerLink' : '/'};
 
@@ -168,26 +131,18 @@ export class FormComponent implements OnInit {
     */    
     validateFields() {
         var valid = true;
-        if (!this.produto.nome) {
+        if (!this.usuario.nome) {
             valid = false;
             this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha o nome!'});
         }
-        if (!this.produto.quantidade) {
+        if (!this.usuario.email) {
             valid = false;
-            this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha a quantidade!'});
+            this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha o email!'});
         }
-        if (!this.produto.preco) {
+        if (!this.usuario.telefone && !this.usuario.celular) {
             valid = false;
-            this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha o preço!'});
-        }
-        if (!this.produto.dataFabricacao) {
-            valid = false;
-            this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha a data de fabricação!'});
-        }
-        if (!this.produto.dataValidade) {
-            valid = false;
-            this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha a data de validade!'});           
-        }
+            this.messageService.add({severity:'warning', summary:'Aviso', detail:'Preencha um telefone para contato!'});
+        }        
         return valid;
     }
 
@@ -202,17 +157,17 @@ export class FormComponent implements OnInit {
         var valid = this.validateFields();
 
         if (valid){
-            if (this.newProduto) {            
-                this.produto.id = this.produtos.length + 1;
-                this.produtos.push(this.produto);
+            if (this.newUser) {            
+                this.usuario.id = this.usuarios.length + 1;
+                this.usuarios.push(this.usuario);
             } else {
-                this.produtos[this.findSelectedProdutoIndex()] = this.produto;
+                this.usuarios[this.findSelectedProdutoIndex()] = this.usuario;
                 console.log(this.findSelectedProdutoIndex());
             }
-            this.produto = null;
+            this.usuario = null;
 
             if (typeof(Storage) !== "undefined") {
-                localStorage.setItem('produtos', JSON.stringify(this.produtos));
+                localStorage.setItem('usuarios', JSON.stringify(this.usuarios));
             }
             this.router.navigate(['/']);
         }        
@@ -225,7 +180,7 @@ export class FormComponent implements OnInit {
     * @returns object
     */  
     findSelectedProdutoIndex(): number {
-        return this.produtos.indexOf(this.produto);
+        return this.usuarios.indexOf(this.usuario);
     } 
 
     /**
@@ -235,7 +190,7 @@ export class FormComponent implements OnInit {
     * @returns null
     */  
     onChange(event) {
-        this.setMaskQtd();
+        this.setMask();
     }
 
     /**
@@ -244,11 +199,7 @@ export class FormComponent implements OnInit {
     * @param event object
     * @returns null
     */ 
-    setMaskQtd() {
-        if (this.produto.unidadeMedida.id == 3) {
-            this.maskQtd = { prefix: '', thousands: '.', decimal: ',', align: 'left', precision:0 };
-        } else {
-            this.maskQtd = { prefix: '', thousands: '.', decimal: ',', align: 'left', precision:3 };
-        } 
+    setMask() {
+        return { prefix: '', thousands: '.', decimal: ',', align: 'left', precision:0 };        
     }    
 }

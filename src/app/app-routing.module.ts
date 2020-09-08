@@ -1,22 +1,13 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FormComponent } from './form.component';
-import { ListComponent } from './list.component';
+import { UsuarioRoutingModule } from 'src/app/usuario/usuario-routing.module';
 
 const routes: Routes = [
   {
-    path: 'cadastrar',
-    component: FormComponent
+    path: 'usuario',
+    loadChildren: () => import('./usuario/usuario-routing.module').then(m => m.UsuarioRoutingModule)
   },
-  {
-    path: '',
-    component: ListComponent
-  },
-  {
-    path: 'editar/:id',
-    component: FormComponent
-  },  
   {
     path: '',
     redirectTo: '',
